@@ -19,6 +19,14 @@ def load_yaml(file_path):
         print("Plik nie istnieje.")
         return None
 
+def save_as_yaml(data, file_path):
+    try:
+        with open(file_path, 'w') as file:
+            yaml.dump(data, file, default_flow_style=False)
+        print(f"Dane zapisane do pliku {file_path} w formacie YAML.")
+    except Exception as e:
+        print(f"Wystąpił błąd podczas zapisu danych do pliku YAML: {e}")
+
 def main():
     args = parse_arguments()
     input_file = args.input_file
@@ -29,6 +37,11 @@ def main():
     if data:
         print("Dane wczytane poprawnie.")
         # Tutaj możesz kontynuować pracę z wczytanymi danymi
+
+        # Zapis danych do pliku YAML
+        save_as_yaml(data, output_file)
+    else:
+        print("Wystąpił błąd podczas wczytywania danych.")
 
 if __name__ == "__main__":
     main()
