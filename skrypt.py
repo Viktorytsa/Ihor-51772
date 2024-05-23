@@ -19,6 +19,14 @@ def load_json(file_path):
         print("Plik nie istnieje.")
         return None
 
+def save_as_json(data, file_path):
+    try:
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+        print(f"Dane zapisane do pliku {file_path} w formacie JSON.")
+    except Exception as e:
+        print(f"Wystąpił błąd podczas zapisu danych do pliku JSON: {e}")
+
 def main():
     args = parse_arguments()
     input_file = args.input_file
@@ -29,6 +37,9 @@ def main():
     if data:
         print("Dane wczytane poprawnie.")
         # Tutaj możesz kontynuować pracę z wczytanymi danymi
+
+        # Zapis danych do pliku JSON
+        save_as_json(data, output_file)
     else:
         print("Wystąpił błąd podczas wczytywania danych.")
 
